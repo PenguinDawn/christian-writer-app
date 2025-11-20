@@ -3,9 +3,7 @@ import { Tabs } from 'expo-router';
 import { CalendarCheck, FilePen, History } from 'lucide-react-native';
 import React from 'react';
 
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import { useColorScheme } from '@/components/useColorScheme';
-import Colors from '@/constants/Colors';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -21,10 +19,13 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
+        tabBarActiveTintColor: "black",
+        tabBarActiveBackgroundColor: "#c4c5f3ff",
+        tabBarInactiveBackgroundColor: "#0B0C6C",
+        tabBarInactiveTintColor: "#c4c5f3ff",
+        // // Disable the static render of the header on web
+        // // to prevent a hydration error in React Navigation v6.
+        // headerShown: useClientOnlyValue(false, true),
       }}>
               <Tabs.Screen
         name="history"
