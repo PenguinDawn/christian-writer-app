@@ -1,18 +1,16 @@
-import { Feather } from 'lucide-react-native';
 import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
+import Header from '@/components/Header';
+import PromptHolder from '@/components/PromptHolder';
 import { Text, View } from '@/components/Themed';
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <View>
-        <Feather />
-        <Text>The Christian Writer</Text>
-
-      </View>
-      <Text style={styles.title}>Tab One</Text>
+      <Header />
+      <Text style={styles.title}>Today's Prompt</Text>
+      <PromptHolder />
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
       <EditScreenInfo path="app/(tabs)/index.tsx" />
     </View>
