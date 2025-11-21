@@ -1,30 +1,38 @@
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
+import ButtonTouch from '@/components/ButtonTouch';
 import Header from '@/components/Header';
 import PromptHolder from '@/components/PromptHolder';
 import { Text, View } from '@/components/Themed';
+import { useState } from 'react';
+
 
 export default function TabOneScreen() {
+  const description = "Hi there";
+  const date = "11/15/2025";
+  const title = "Saul's Deception";
+
+  const [themeBackground, changeBackground] = useState("black");
+  const [themeColor, changeColor] = useState("white")
+
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: themeBackground }]}>
       <Header />
-      <Text style={styles.title}>Today's Prompt</Text>
-      <PromptHolder />
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
+      <Text style={[styles.title, { color: themeColor }]}>Today's Prompt</Text>
+      <PromptHolder date={date} title={title} description={description} />
+      <ButtonTouch size="half" run={() => {}} color="green" middle={"Copy"}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    gap: 10,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   separator: {
