@@ -2,7 +2,7 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 
 
-const ButtonTouch = (run, size, color, middle) => {
+const ButtonTouch = ({run, size, color, middle}) => {
 
     let sizing;
     if(size === "full") {
@@ -36,10 +36,8 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 5,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    alignItems: "center",
+    justifyContent: "center",
   },
   white: {
     color: "white",
@@ -50,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   small: {
-    width: "40%",
+    width: "42%",
   },
   large: {
     width: "80%",
@@ -59,6 +57,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#C9ECCB",
   },
   blue: {
-    backgroundColor: "0C4185",
+    backgroundColor: "#0C4185",
   }
 });

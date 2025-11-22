@@ -21,7 +21,11 @@ export default function TabOneScreen() {
       <Header />
       <Text style={[styles.title, { color: themeColor }]}>Today's Prompt</Text>
       <PromptHolder date={date} title={title} description={description} />
-      <ButtonTouch size="half" run={() => {}} color="green" middle={"Copy"}/>
+      <View style={[styles.buttonHolder, {backgroundColor: themeBackground}]}> 
+        <ButtonTouch size="half" run={() => {}} color="green" middle={"Copy"}/>
+        <ButtonTouch size="half" run={() => {}} color="green" middle={"Share"}/>
+      </View>
+      <ButtonTouch size="full" run={() => {}} color="primary" middle={"Write"}/>
     </View>
   );
 }
@@ -30,6 +34,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     gap: 10,
+    height: "100%",
+  },
+  buttonHolder: {
+    width: "90%",
+    gap: "6%",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   title: {
     fontSize: 24,

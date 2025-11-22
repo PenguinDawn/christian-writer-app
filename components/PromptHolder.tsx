@@ -15,7 +15,7 @@ export default PromptHolder
 
 const styles = StyleSheet.create({
   container: {
-    width: "80%",
+    width: "82%",
     padding: 10,
     borderRadius: 5,
     borderColor: "black",
