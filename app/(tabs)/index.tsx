@@ -7,7 +7,7 @@ import { Text, View } from '@/components/Themed';
 import { useState } from 'react';
 
 
-export default function TabOneScreen() {
+export default function HomeScreen() {
   const description = "Hi there";
   const date = "11/15/2025";
   const title = "Saul's Deception";
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   buttonHolder: {
     width: "90%",
-    gap: "6%",
+    gap: "4%",
     flexDirection: "row",
     justifyContent: "center",
   },

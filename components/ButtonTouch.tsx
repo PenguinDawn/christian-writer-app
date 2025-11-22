@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   small: {
-    width: "42%",
+    width: "43%",
   },
   large: {
     width: "80%",

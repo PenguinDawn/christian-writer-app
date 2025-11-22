@@ -1,26 +1,45 @@
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
+import GoToHolder from '@/components/GoToHolder';
+import Header from '@/components/Header';
 import { Text, View } from '@/components/Themed';
+import { useState } from 'react';
 
-export default function History() {
+
+export default function HistoryScreen() {
+  const description = "Hi there";
+  const date = "11/15/2025";
+  const title = "Saul's Deception";
+
+  const [themeBackground, changeBackground] = useState("black");
+  const [themeColor, changeColor] = useState("white")
+
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/two.tsx" />
+    // change to flatlist
+    <View style={[styles.container, { backgroundColor: themeBackground }]}>
+      <Header />
+      <Text style={[styles.title, { color: themeColor }]}>History</Text>
+      <GoToHolder />
+      
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    gap: 10,
+    height: "100%",
+  },
+  buttonHolder: {
+    width: "90%",
+    gap: "4%",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   separator: {
