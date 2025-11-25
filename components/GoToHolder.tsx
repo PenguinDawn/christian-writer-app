@@ -1,12 +1,18 @@
 
+import { useRouter } from 'expo-router';
 import { ChevronRight } from 'lucide-react-native';
 import { Pressable, StyleSheet, Text } from 'react-native';
 
 // expo router navigate to special page
 
 const GoToHolder = ({date, name}) => {
+  const router = useRouter();
   return (
-      <Pressable style={[styles.holder]}>
+      <Pressable onPress={() =>
+              router.push({
+                pathname: `/(tabs)/[writing]`,
+                params: { writing: name, date: date}
+              })} style={[styles.holder]}>
         <Text style={styles.font}>{date} - {name}</Text>
         <ChevronRight size={36}/>
       </Pressable>

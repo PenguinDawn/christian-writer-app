@@ -28,7 +28,7 @@ export default function TabLayout() {
         // headerShown: useClientOnlyValue(false, true),
       }}>
               <Tabs.Screen
-        name="history"
+        name="(historyWrite)/history"
         options={{
           title: 'History',
           tabBarIcon: ({ color }) => <History color={color} />,
@@ -42,10 +42,22 @@ export default function TabLayout() {
         }}
       />
             <Tabs.Screen
-        name="prompts"
+        name="(prompting)/prompts"
         options={{
           title: 'Prompts',
           tabBarIcon: ({ color }) => <FilePen color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="(prompting)/[prompt]"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="(historyWrite)/[writing]"
+        options={{
+          href: null,
         }}
       />
 

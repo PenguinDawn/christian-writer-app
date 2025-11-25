@@ -5,7 +5,9 @@ const PromptHolder = ({date, title, description}) => {
 
   return (
     <View style={styles.container}>
+      {date &&
         <Text style={styles.title}>{date} - {title}</Text>
+      }
         <Text>{description}</Text>
     </View>
   )

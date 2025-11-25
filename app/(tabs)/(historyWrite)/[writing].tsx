@@ -1,0 +1,86 @@
+import { ScrollView, StyleSheet, TextInput } from 'react-native';
+
+import ButtonTouch from '@/components/ButtonTouch';
+import Header from '@/components/Header';
+import PromptHolder from '@/components/PromptHolder';
+import { Text, View } from '@/components/Themed';
+import { useLocalSearchParams } from 'expo-router';
+import { useState } from 'react';
+
+
+export default function WritingScreen() {
+
+    const {writing, date} = useLocalSearchParams();
+  const description = "Hi there";
+  const [themeBackground, changeBackground] = useState("black");
+  const [themeColor, changeColor] = useState("white")
+
+  const [writingBlock, setWritingBlock] = useState("");
+
+    const [inputHeight, setInputHeight] = useState(40); // Initial heightvalue
+
+  const handleContentSizeChange = (event) => {
+    setInputHeight(event.nativeEvent.contentSize.height);
+  };
+
+
+
+  return (
+    <ScrollView style={[{ backgroundColor: themeBackground }]}>
+    <View style={[styles.container, { backgroundColor: themeBackground }]}>
+      <Header />
+
+      <View style={[styles.titleHolder, { backgroundColor: themeBackground }]}>
+        <Text style={[styles.title2, { color: themeColor }]}>{date}</Text>
+        <Text style={[styles.title, { color: themeColor }]}>{writing}</Text>
+      </View>
+      <PromptHolder description={description} />
+            <View style={[styles.buttonHolder, {backgroundColor: themeBackground}]}> 
+        <ButtonTouch size="half" run={() => {}} color="green" middle={"Copy"}/>
+        <ButtonTouch size="half" run={() => {}} color="green" middle={"Share"}/>
+      </View>
+
+      <TextInput onContentSizeChange={handleContentSizeChange} multiline={true} placeholder="Your story here..." style={[styles.writingHolder, {borderColor: themeColor, height: inputHeight}]} value={writingBlock} onChangeText={(text) => {setWritingBlock(text)}}></TextInput>
+    </View>
+      </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    gap: 10,
+    height: "100%",
+  },
+  buttonHolder: {
+    width: "90%",
+    gap: "4%",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+
+  title2: {
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: '80%',
+  },
+  titleHolder: {
+    alignItems: "center",
+  },
+  writingHolder: {
+    width: "81%",
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 2.5,
+    minHeight: 200,
+    backgroundColor: "#DCE0DC",
+  },
+});

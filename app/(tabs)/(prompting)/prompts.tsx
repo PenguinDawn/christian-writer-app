@@ -6,7 +6,7 @@ import { Text, View } from '@/components/Themed';
 import { useState } from 'react';
 
 
-export default function HistoryScreen() {
+export default function PromptScreen() {
   const description = "Hi there";
   const date = "11/15/2025";
   const title = "Saul's Deception";
@@ -19,8 +19,8 @@ export default function HistoryScreen() {
     // change to flatlist
     <View style={[styles.container, { backgroundColor: themeBackground }]}>
       <Header />
-      <Text style={[styles.title, { color: themeColor }]}>History</Text>
-      <GoToHolder />
+      <Text style={[styles.title, { color: themeColor }]}>Prompts</Text>
+      <GoToHolder date={"11/11/11"} name={"Saul"}/>
       
     </View>
   );
