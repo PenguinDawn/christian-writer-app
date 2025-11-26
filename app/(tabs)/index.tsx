@@ -5,23 +5,27 @@ import ButtonTouch from '@/components/ButtonTouch';
 import Header from '@/components/Header';
 import PromptHolder from '@/components/PromptHolder';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export default function HomeScreen() {
 
   const [themeBackground, changeBackground] = useState("black");
   const [themeColor, changeColor] = useState("white");
-  let colorMode = useColorScheme();
+  useEffect(() => {
+    let colorMode = useColorScheme();
 
-  if (colorMode == "light") {
-    changeBackground("white");
-    changeColor("black");
-  }
-  else {
-    changeBackground("black");
-    changeColor("white");
-  }
+    if (colorMode == "light") {
+      changeBackground("white");
+      changeColor("black");
+    }
+    else {
+      changeBackground("black");
+      changeColor("white");
+    }
+
+  }, [])
+
 
   const router = useRouter();
   const description = "Hi there";
@@ -30,16 +34,16 @@ export default function HomeScreen() {
 
 
 
-   const copyToClipboard = async () => {
+  const copyToClipboard = async () => {
     await Clipboard.setStringAsync(description);
     alert('Copied to Clipboard!'); // Provide user feedback
   };
 
-    const onShare = async () => {
+  const onShare = async () => {
     try {
       const result = await Share.share({
         message: description,
-        title: date + "-" + title , // Title is for the share sheet itself
+        title: date + "-" + title, // Title is for the share sheet itself
       });
 
       // Handle the result (e.g., sharedAction or dismissedAction)
@@ -63,15 +67,15 @@ export default function HomeScreen() {
       <Header />
       <Text style={[styles.title, { color: themeColor }]}>Today's Prompt</Text>
       <PromptHolder date={date} title={title} description={description} />
-      <View style={[styles.buttonHolder, {backgroundColor: themeBackground}]}> 
-        <ButtonTouch size="half" run={copyToClipboard} color="green" middle={"Copy"}/>
-        <ButtonTouch size="half" run={onShare} color="green" middle={"Share"}/>
+      <View style={[styles.buttonHolder, { backgroundColor: themeBackground }]}>
+        <ButtonTouch size="half" run={copyToClipboard} color="green" middle={"Copy"} />
+        <ButtonTouch size="half" run={onShare} color="green" middle={"Share"} />
       </View>
       <ButtonTouch size="full" run={() =>
-              router.push({
-                pathname: "/(tabs)/(historyWrite)/[writing]",
-                params: { writing: title, date: date}
-              })} color="primary" middle={"Write"}/>
+        router.push({
+          pathname: "/(tabs)/(historyWrite)/[writing]",
+          params: { writing: title, date: date }
+        })} color="primary" middle={"Write"} />
     </View>
   );
 }

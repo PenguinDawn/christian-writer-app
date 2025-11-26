@@ -6,17 +6,18 @@ import Header from '@/components/Header';
 import PromptHolder from '@/components/PromptHolder';
 import ReturnWriting from '@/components/ReturnToScreen';
 import { useLocalSearchParams } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export default function WritingScreen() {
 
-  const {writing, date} = useLocalSearchParams();
+  const { writing, date } = useLocalSearchParams();
   const description = "Hi there";
-    const [themeBackground, changeBackground] = useState("black");
-    const [themeColor, changeColor] = useState("white");
+  const [themeBackground, changeBackground] = useState("black");
+  const [themeColor, changeColor] = useState("white");
+  useEffect(() => {
     let colorMode = useColorScheme();
-  
+
     if (colorMode == "light") {
       changeBackground("white");
       changeColor("black");
@@ -26,45 +27,47 @@ export default function WritingScreen() {
       changeColor("white");
     }
 
+  }, [])
+
   const [writingBlock, setWritingBlock] = useState("");
 
-    const [inputHeight, setInputHeight] = useState(40); // Initial heightvalue
+  const [inputHeight, setInputHeight] = useState(40); // Initial heightvalue
 
   const handleContentSizeChange = (event) => {
     setInputHeight(event.nativeEvent.contentSize.height);
   };
 
-      const copyToClipboard = async () => {
-        await Clipboard.setStringAsync(description);
-        alert('Copied to Clipboard!'); // Provide user feedback
-      };
-  
-          const copyToClipboardWriting = async () => {
-            await Clipboard.setStringAsync(writingBlock);
-            alert('Copied to Clipboard!'); // Provide user feedback
-          };
-      
+  const copyToClipboard = async () => {
+    await Clipboard.setStringAsync(description);
+    alert('Copied to Clipboard!'); // Provide user feedback
+  };
+
+  const copyToClipboardWriting = async () => {
+    await Clipboard.setStringAsync(writingBlock);
+    alert('Copied to Clipboard!'); // Provide user feedback
+  };
+
 
 
   return (
     <ScrollView style={[{ backgroundColor: themeBackground }]}>
-    <View style={[styles.container, { backgroundColor: themeBackground }]}>
-      <Header />
-      <ReturnWriting />
+      <View style={[styles.container, { backgroundColor: themeBackground }]}>
+        <Header />
+        <ReturnWriting />
 
-      <View style={[styles.titleHolder, { backgroundColor: themeBackground }]}>
-        <Text style={[styles.title2, { color: themeColor }]}>{date}</Text>
-        <Text style={[styles.title, { color: themeColor }]}>{writing}</Text>
-      </View>
-      <PromptHolder description={description} />
-      <View style={[styles.buttonHolder, {backgroundColor: themeBackground}]}> 
-        <ButtonTouch size="half" run={copyToClipboard} color="green" middle={"Copy Prompt"}/>
-        <ButtonTouch size="half" run={copyToClipboardWriting} color="green" middle={"Copy Writing"}/>
-      </View>
+        <View style={[styles.titleHolder, { backgroundColor: themeBackground }]}>
+          <Text style={[styles.title2, { color: themeColor }]}>{date}</Text>
+          <Text style={[styles.title, { color: themeColor }]}>{writing}</Text>
+        </View>
+        <PromptHolder description={description} />
+        <View style={[styles.buttonHolder, { backgroundColor: themeBackground }]}>
+          <ButtonTouch size="half" run={copyToClipboard} color="green" middle={"Copy Prompt"} />
+          <ButtonTouch size="half" run={copyToClipboardWriting} color="green" middle={"Copy Writing"} />
+        </View>
 
-      <TextInput onContentSizeChange={handleContentSizeChange} multiline={true} placeholder="Your story here..." style={[styles.writingHolder, {borderColor: themeColor, height: inputHeight}]} value={writingBlock} onChangeText={(text) => {setWritingBlock(text)}}></TextInput>
-    </View>
-      </ScrollView>
+        <TextInput onContentSizeChange={handleContentSizeChange} multiline={true} placeholder="Your story here..." style={[styles.writingHolder, { borderColor: themeColor, height: inputHeight }]} value={writingBlock} onChangeText={(text) => { setWritingBlock(text) }}></TextInput>
+      </View>
+    </ScrollView>
   );
 }
 

@@ -2,7 +2,7 @@
 import { useRouter } from 'expo-router';
 import { ChevronLeft } from 'lucide-react-native';
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, useColorScheme } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 // expo router navigate to special page
 
@@ -10,16 +10,16 @@ const ReturnPrompt = () => {
   const router = useRouter();
       const [themeBackground, changeBackground] = useState("black");
       const [themeColor, changeColor] = useState("white");
-      let colorMode = useColorScheme();
+      // let colorMode = useColorScheme();
     
-      if (colorMode == "light") {
-        changeBackground("white");
-        changeColor("black");
-      }
-      else {
-        changeBackground("black");
-        changeColor("white");
-      }
+      // if (colorMode == "light") {
+      //   changeBackground("white");
+      //   changeColor("black");
+      // }
+      // else {
+      //   changeBackground("black");
+      //   changeColor("white");
+      // }
 
   return (
       <Pressable onPress={() => {router.navigate("/(tabs)/(prompting)/prompts")}} style={[styles.holder, {backgroundColor: themeBackground}]}>

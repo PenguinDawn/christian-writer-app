@@ -2,7 +2,7 @@ import { StyleSheet, Text, useColorScheme, View } from 'react-native';
 
 import GoToHolder from '@/components/GoToHolder';
 import Header from '@/components/Header';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export default function HistoryScreen() {
@@ -10,10 +10,11 @@ export default function HistoryScreen() {
   const date = "11/15/2025";
   const title = "Saul's Deception";
 
-    const [themeBackground, changeBackground] = useState("black");
-    const [themeColor, changeColor] = useState("white");
+  const [themeBackground, changeBackground] = useState("black");
+  const [themeColor, changeColor] = useState("white");
+  useEffect(() => {
     let colorMode = useColorScheme();
-  
+
     if (colorMode == "light") {
       changeBackground("white");
       changeColor("black");
@@ -23,14 +24,15 @@ export default function HistoryScreen() {
       changeColor("white");
     }
 
+  }, [])
 
   return (
     // change to flatlist
     <View style={[styles.container, { backgroundColor: themeBackground }]}>
       <Header />
       <Text style={[styles.title, { color: themeColor }]}>History</Text>
-      <GoToHolder date={"11/11/11"} name={"Saul"}/>
-      
+      <GoToHolder date={"11/11/11"} name={"Saul"} />
+
     </View>
   );
 }
