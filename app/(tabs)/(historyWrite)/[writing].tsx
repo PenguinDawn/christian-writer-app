@@ -1,10 +1,11 @@
 import * as Clipboard from 'expo-clipboard';
-import { ScrollView, StyleSheet, Text, TextInput, useColorScheme, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import ButtonTouch from '@/components/ButtonTouch';
 import Header from '@/components/Header';
 import PromptHolder from '@/components/PromptHolder';
 import ReturnWriting from '@/components/ReturnToScreen';
+import { useColorScheme } from '@/components/useColorScheme';
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 
@@ -76,6 +77,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
     height: "100%",
+    paddingBottom: 20,
   },
   buttonHolder: {
     width: "90%",

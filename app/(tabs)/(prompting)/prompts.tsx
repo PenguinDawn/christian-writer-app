@@ -1,7 +1,8 @@
-import { StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import GoToHolder from '@/components/GoToHolder';
 import Header from '@/components/Header';
+import { useColorScheme } from '@/components/useColorScheme';
 import { useEffect, useState } from 'react';
 
 

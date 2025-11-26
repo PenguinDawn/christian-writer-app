@@ -1,12 +1,12 @@
 import * as Clipboard from 'expo-clipboard';
-import { Share, StyleSheet, Text, useColorScheme, View } from 'react-native';
+import { Share, StyleSheet, Text, View } from 'react-native';
 
 import ButtonTouch from '@/components/ButtonTouch';
 import Header from '@/components/Header';
 import PromptHolder from '@/components/PromptHolder';
+import { useColorScheme } from '@/components/useColorScheme';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-
 
 export default function HomeScreen() {
 
