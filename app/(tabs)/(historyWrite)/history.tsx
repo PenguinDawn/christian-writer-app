@@ -1,8 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, useColorScheme, View } from 'react-native';
 
 import GoToHolder from '@/components/GoToHolder';
 import Header from '@/components/Header';
-import { Text, View } from '@/components/Themed';
 import { useState } from 'react';
 
 
@@ -11,8 +10,18 @@ export default function HistoryScreen() {
   const date = "11/15/2025";
   const title = "Saul's Deception";
 
-  const [themeBackground, changeBackground] = useState("black");
-  const [themeColor, changeColor] = useState("white")
+    const [themeBackground, changeBackground] = useState("black");
+    const [themeColor, changeColor] = useState("white");
+    let colorMode = useColorScheme();
+  
+    if (colorMode == "light") {
+      changeBackground("white");
+      changeColor("black");
+    }
+    else {
+      changeBackground("black");
+      changeColor("white");
+    }
 
 
   return (
