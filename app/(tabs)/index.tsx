@@ -28,9 +28,9 @@ export default function HomeScreen() {
 
 
   const router = useRouter();
-  const description = "Hi there";
-  const date = "11/15/2025";
-  const title = "Saul's Deception";
+  const date = "01/30/25"; // would use get new Date()
+
+  
 
 
 
