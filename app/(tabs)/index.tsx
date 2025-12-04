@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 
 export default function HomeScreen() {
 
+
   const [themeBackground, changeBackground] = useState("black");
   const [themeColor, changeColor] = useState("white");
   useEffect(() => {
@@ -28,30 +29,17 @@ export default function HomeScreen() {
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [data, setData] = useState()
   const router = useRouter();
-  const [date, setDate] = useState("")
-  const [day, setDay] = useState(0);
-  const [dayStr, setDayStr] = useState("");
-  const [month, setMonth] = useState(0);
-  const [monthStr, setMonthStr] = useState("");
-
+  const [date, setDate] = useState("");
 
   useEffect(() => {
-    const firstDate = new Date(); // would use get new Date()
+  // would use get new Date()
+    const today = new Date();
+    const day = today.getDay().toString().padStart(2, "0");
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
 
-    setDay(firstDate.getDay());
-    if (day < 10) {
-      setDayStr("0" + day.toString());
-    }
-
-
-    setDay(firstDate.getMonth());
-    if (month < 10) {
-      setMonthStr("0" + month.toString());
-    }
-    const year = (firstDate.getFullYear()).toString().slice(-2);
-    setDate(`${monthStr}/${dayStr}/${year}`);
+    const year = (today.getFullYear()).toString().slice(-2);
+    setDate(`${month}/${day}/${year}`);
   }, [])
 
 
@@ -82,22 +70,33 @@ export default function HomeScreen() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("../assets/prompts.json");
-        const json = await response.json();
-        setData(json);
-        setData(data?.map((prompt) => { prompt.date === date }))
-        setDescription(data.description);
-        setTitle(data.title);
-      } catch (error) {
-        console.error(error)
-      }
-    };
 
-    fetchData();
-  }, []);
+
+  //  useEffect(() => {
+
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('https://github.com/PenguinDawn/prompted-json/blob/main/prompts.json');
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       const json = await response.json();
+  //       setData(json);
+  //     } catch (error) {
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  //   setData(data.filter((prompt) => (prompt.date == date)))
+  // }, []); 
+
+
+
+  const [data, setData] = useState<any | undefined>();
+
+  const [loading, setLoading] = useState(true);
+
 
   return (
     <View style={[styles.container, { backgroundColor: themeBackground }]}>
@@ -113,6 +112,10 @@ export default function HomeScreen() {
           pathname: "/(tabs)/(historyWrite)/[writing]",
           params: { writing: title, date: date }
         })} color="primary" middle={"Write"} />
+
+        <View>
+          <Text>{data}</Text>
+        </View>
     </View>
   );
 }
