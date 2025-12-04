@@ -26,12 +26,20 @@ export default function HomeScreen() {
 
   }, [])
 
-
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [data, setData] = useState()
   const router = useRouter();
-  const date = "01/30/25"; // would use get new Date()
+  const [date, setDate] = useState("")
 
-  
 
+  useEffect(() => {
+    const firstDate = new Date(); // would use get new Date()
+    const month = firstDate.getMonth();
+    const day = firstDate.getDay();
+    const year = firstDate.getFullYear.toString().slice(-2);
+    setDate(`${month}/${day}/${year}`);
+  }, [])
 
 
   const copyToClipboard = async () => {
@@ -61,6 +69,22 @@ export default function HomeScreen() {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("../assets/prompts.json");
+        const json = await response.json();
+        setData(json);
+        setData(data.map((prompt) => { prompt.date === date }))
+        setDescription(data.description);
+        setTitle(data.title);
+      } catch (error) {
+        console.error(error)
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <View style={[styles.container, { backgroundColor: themeBackground }]}>
