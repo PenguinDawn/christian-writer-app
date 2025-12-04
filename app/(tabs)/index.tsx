@@ -31,14 +31,27 @@ export default function HomeScreen() {
   const [data, setData] = useState()
   const router = useRouter();
   const [date, setDate] = useState("")
+  const [day, setDay] = useState(0);
+  const [dayStr, setDayStr] = useState("");
+  const [month, setMonth] = useState(0);
+  const [monthStr, setMonthStr] = useState("");
 
 
   useEffect(() => {
     const firstDate = new Date(); // would use get new Date()
-    const month = firstDate.getMonth();
-    const day = firstDate.getDay();
-    const year = firstDate.getFullYear.toString().slice(-2);
-    setDate(`${month}/${day}/${year}`);
+
+    setDay(firstDate.getDay());
+    if (day < 10) {
+      setDayStr("0" + day.toString());
+    }
+
+
+    setDay(firstDate.getMonth());
+    if (month < 10) {
+      setMonthStr("0" + month.toString());
+    }
+    const year = (firstDate.getFullYear()).toString().slice(-2);
+    setDate(`${monthStr}/${dayStr}/${year}`);
   }, [])
 
 
@@ -75,7 +88,7 @@ export default function HomeScreen() {
         const response = await fetch("../assets/prompts.json");
         const json = await response.json();
         setData(json);
-        setData(data.map((prompt) => { prompt.date === date }))
+        setData(data?.map((prompt) => { prompt.date === date }))
         setDescription(data.description);
         setTitle(data.title);
       } catch (error) {
