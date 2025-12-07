@@ -8,8 +8,9 @@ import { useColorScheme } from '@/components/useColorScheme';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 
-export default function HomeScreen() {
+import prompted from "../../assets/prompts.json";
 
+export default function HomeScreen() {
 
   const [themeBackground, changeBackground] = useState("black");
   const [themeColor, changeColor] = useState("white");
@@ -32,15 +33,6 @@ export default function HomeScreen() {
   const router = useRouter();
   const [date, setDate] = useState("");
 
-  useEffect(() => {
-  // would use get new Date()
-    const today = new Date();
-    const day = today.getDay().toString().padStart(2, "0");
-    const month = (today.getMonth() + 1).toString().padStart(2, "0");
-
-    const year = (today.getFullYear()).toString().slice(-2);
-    setDate(`${month}/${day}/${year}`);
-  }, [])
 
 
   const copyToClipboard = async () => {
@@ -72,30 +64,27 @@ export default function HomeScreen() {
 
 
 
-  //  useEffect(() => {
+   useEffect(() => {
+    // would use get new Date()
+    const today = new Date();
+    const day = today.getDate().toString().padStart(2, "0");
+    const month = (today.getMonth() + 1).toString().padStart(2, "0");
 
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('https://github.com/PenguinDawn/prompted-json/blob/main/prompts.json');
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       }
-  //       const json = await response.json();
-  //       setData(json);
-  //     } catch (error) {
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  //   setData(data.filter((prompt) => (prompt.date == date)))
-  // }, []); 
+    const year = (today.getFullYear()).toString().slice(-2);
+    setDate(`${month}/${day}/${year}`);
+
+ 
+
+    setTitle((prompted.prompts.find(prompt => prompt.date === date)).title)
+    setDescription((prompted.prompts.find(prompt => prompt.date === date)).description)
+  
+  
+   }, []); 
 
 
 
-  const [data, setData] = useState<any | undefined>();
 
-  const [loading, setLoading] = useState(true);
+
 
 
   return (
@@ -113,9 +102,6 @@ export default function HomeScreen() {
           params: { writing: title, date: date }
         })} color="primary" middle={"Write"} />
 
-        <View>
-          <Text>{data}</Text>
-        </View>
     </View>
   );
 }
