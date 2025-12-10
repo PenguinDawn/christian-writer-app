@@ -23,6 +23,7 @@ export default function TabLayout() {
         tabBarActiveBackgroundColor: "#c4c5f3ff",
         tabBarInactiveBackgroundColor: "#0B0C6C",
         tabBarInactiveTintColor: "#c4c5f3ff",
+        headerShown: false,
         // // Disable the static render of the header on web
         // // to prevent a hydration error in React Navigation v6.
         // headerShown: useClientOnlyValue(false, true),

@@ -5,13 +5,13 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 
 // expo router navigate to special page
 
-const GoToHolder = ({date, name, description, writ}) => {
+const GoToPrompt = ({date, name, description, writ}) => {
   const router = useRouter();
   return (
       <Pressable onPress={() =>
               router.push({
-                pathname: `/(tabs)/(historyWrite)/[writing]`,
-                params: { writing: name, date: date, description: description, writ: writ}
+                pathname: `/(tabs)/(prompting)/[prompt]`,
+                params: { title: name, date: date, description: description, writ: writ}
               })} style={[styles.holder]}>
         <Text style={styles.font}>{date} - {name}</Text>
         <ChevronRight size={36}/>
@@ -19,7 +19,7 @@ const GoToHolder = ({date, name, description, writ}) => {
   )
 }
 
-export default GoToHolder
+export default GoToPrompt
 
 const styles = StyleSheet.create({
   holder: {

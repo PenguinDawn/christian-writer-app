@@ -7,8 +7,8 @@ import PromptHolder from '@/components/PromptHolder';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-
 import prompted from "../../assets/prompts.json";
+
 
 export default function HomeScreen() {
 
@@ -30,9 +30,18 @@ export default function HomeScreen() {
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
+  const [writ, setWrit] = useState("")
   const router = useRouter();
   const [date, setDate] = useState("");
 
+  const [data, setData] = useState<any | undefined>();
+  useEffect(() => {
+    //  setData(prompted.prompts.filter((item) => item.date === date)[0])
+     console.log(prompted.prompts.find(item => item.date == date))
+     setTitle(prompted.prompts.find(item => item.date == date).title)
+     setDescription(prompted.prompts.find(item => item.date == date).description)
+     setWrit(prompted.prompts.find(item => item.date == date).writing)
+  }, [])
 
 
   const copyToClipboard = async () => {
@@ -64,7 +73,9 @@ export default function HomeScreen() {
 
 
 
-   useEffect(() => {
+
+
+  useEffect(() => {
     // would use get new Date()
     const today = new Date();
     const day = today.getDate().toString().padStart(2, "0");
@@ -74,12 +85,7 @@ export default function HomeScreen() {
     setDate(`${month}/${day}/${year}`);
 
  
-
-    setTitle((prompted.prompts.find(prompt => prompt.date === date)).title)
-    setDescription((prompted.prompts.find(prompt => prompt.date === date)).description)
-  
-  
-   }, []); 
+  }, []);
 
 
 
@@ -91,7 +97,7 @@ export default function HomeScreen() {
     <View style={[styles.container, { backgroundColor: themeBackground }]}>
       <Header />
       <Text style={[styles.title, { color: themeColor }]}>Today's Prompt</Text>
-      <PromptHolder date={date} title={title} description={description} />
+      <PromptHolder date={date} title={title} description={description}/>
       <View style={[styles.buttonHolder, { backgroundColor: themeBackground }]}>
         <ButtonTouch size="half" run={copyToClipboard} color="green" middle={"Copy"} />
         <ButtonTouch size="half" run={onShare} color="green" middle={"Share"} />
@@ -99,7 +105,7 @@ export default function HomeScreen() {
       <ButtonTouch size="full" run={() =>
         router.push({
           pathname: "/(tabs)/(historyWrite)/[writing]",
-          params: { writing: title, date: date }
+          params: { title: title, date: date, description: description, writ: writ}
         })} color="primary" middle={"Write"} />
 
     </View>

@@ -5,11 +5,18 @@ import Header from '@/components/Header';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useEffect, useState } from 'react';
 
+import { FlatList } from 'react-native';
+import prompted from "../../../assets/prompts.json";
+
 
 export default function HistoryScreen() {
-  const description = "Hi there";
-  const date = "11/15/2025";
-  const title = "Saul's Deception";
+
+  const [data, setData] = useState<any | undefined>();
+
+  useEffect(() => {
+    setData(prompted.prompts.filter((item) => item.writing !== undefined))
+
+  }, [])
 
   const [themeBackground, changeBackground] = useState("black");
   const [themeColor, changeColor] = useState("white");
@@ -29,20 +36,35 @@ export default function HistoryScreen() {
 
   return (
     // change to flatlist
-    <View style={[styles.container, { backgroundColor: themeBackground }]}>
-      <Header />
-      <Text style={[styles.title, { color: themeColor }]}>History</Text>
-      <GoToHolder date={"11/11/11"} name={"Saul"} />
+    <FlatList
+      contentContainerStyle={[{
+        backgroundColor: themeBackground, gap: 10,
+        height: "100%",
+      }]}
+      data={data}
+      renderItem={({ item }) => (
+        <GoToHolder date={item.date} name={item.title} description={item.description} writ={item.writing} />
+      )}
+      keyExtractor={item => item.date}
+      ListHeaderComponent={
+        <View>
+          <Header />
+          <Text style={[styles.title, { color: themeColor, textAlign: "center" }]}>History</Text>
+        </View>
+      }
+    >
 
-    </View>
+
+
+
+
+    </FlatList>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    gap: 10,
-    height: "100%",
+
   },
   buttonHolder: {
     width: "90%",
@@ -53,6 +75,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginTop: 10,
   },
   separator: {
     marginVertical: 30,

@@ -6,15 +6,13 @@ import Header from '@/components/Header';
 import PromptHolder from '@/components/PromptHolder';
 import ReturnPrompt from '@/components/ReturnPrompt';
 import { useColorScheme } from '@/components/useColorScheme';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 
 
 export default function HomeScreen() {
-  const description = "Hi there";
-  const date = "11/15/2025";
-  const title = "Saul's Deception";
-
+    const { title, date, description, writ} = useLocalSearchParams();
+  
   const [themeBackground, changeBackground] = useState("black");
   const [themeColor, changeColor] = useState("white");
   useEffect(() => {
@@ -74,7 +72,7 @@ export default function HomeScreen() {
       <ButtonTouch size="full" run={() =>
         router.push({
           pathname: "/(tabs)/(historyWrite)/[writing]",
-          params: { writing: title, date: date }
+          params: { title: title, date: date, description: description, writ: writ}
         })} color="primary" middle={"Write"} />
     </View>
   );

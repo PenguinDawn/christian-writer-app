@@ -12,8 +12,8 @@ import { useEffect, useState } from 'react';
 
 export default function WritingScreen() {
 
-  const { writing, date } = useLocalSearchParams();
-  const description = "Hi there";
+  const { title, date, description, writ } = useLocalSearchParams();
+
   const [themeBackground, changeBackground] = useState("black");
   const [themeColor, changeColor] = useState("white");
   useEffect(() => {
@@ -31,6 +31,12 @@ export default function WritingScreen() {
   }, [])
 
   const [writingBlock, setWritingBlock] = useState("");
+
+  useEffect(() => {
+    if(writ != undefined) {
+      setWritingBlock(writ);
+    }
+  })
 
   const [inputHeight, setInputHeight] = useState(40); // Initial heightvalue
 
@@ -58,7 +64,7 @@ export default function WritingScreen() {
 
         <View style={[styles.titleHolder, { backgroundColor: themeBackground }]}>
           <Text style={[styles.title2, { color: themeColor }]}>{date}</Text>
-          <Text style={[styles.title, { color: themeColor }]}>{writing}</Text>
+          <Text style={[styles.title, { color: themeColor }]}>{title}</Text>
         </View>
         <PromptHolder description={description} />
         <View style={[styles.buttonHolder, { backgroundColor: themeBackground }]}>

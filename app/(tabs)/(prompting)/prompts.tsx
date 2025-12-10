@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import GoToHolder from '@/components/GoToHolder';
 import Header from '@/components/Header';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useEffect, useState } from 'react';
 
+import GoToPrompt from '@/components/GoToPrompt';
+import { FlatList } from 'react-native';
+import prompted from "../../../assets/prompts.json";
 
-export default function PromptScreen() {
-  const description = "Hi there";
-  const date = "11/15/2025";
-  const title = "Saul's Deception";
+
+export default function PromptsScreen() {
+
 
   const [themeBackground, changeBackground] = useState("black");
   const [themeColor, changeColor] = useState("white");
@@ -27,23 +28,29 @@ export default function PromptScreen() {
 
   }, [])
 
-
   return (
     // change to flatlist
-    <View style={[styles.container, { backgroundColor: themeBackground }]}>
-      <Header />
-      <Text style={[styles.title, { color: themeColor }]}>Prompts</Text>
-      <GoToHolder date={"11/11/11"} name={"Saul"} />
-
-    </View>
+    <FlatList
+      contentContainerStyle={[{ backgroundColor: themeBackground, gap: 10, height: "100%", paddingBottom: 50}]}
+      data={prompted.prompts}
+      renderItem={({ item }) => (
+        <GoToPrompt date={item.date} name={item.title} description={item.description} writ={item.writing}/>
+      )}
+      keyExtractor={item => item.date}
+      ListHeaderComponent={
+        <View>
+          <Header />
+          <Text style={[styles.title, { color: themeColor, textAlign: "center" }]}>Prompts</Text>
+        </View>
+      }
+    >
+    </FlatList>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    gap: 10,
-    height: "100%",
+
   },
   buttonHolder: {
     width: "90%",
@@ -54,6 +61,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+   marginTop: 10,
   },
   separator: {
     marginVertical: 30,
