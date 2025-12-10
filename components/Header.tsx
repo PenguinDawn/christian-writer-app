@@ -1,12 +1,11 @@
-import { Feather } from 'lucide-react-native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const Header = () => {
   return (
     <View style={styles.header}>
-        <Feather style={styles.padding1} color="white" size="30"/>
-        <Text style={styles.title}>The Christian Writer</Text>
+        {/* <Feather style={styles.padding1} color="white" size="30"/>
+        <Text style={styles.title}>The Christian Writer</Text> */}
     </View>
   )
 }
@@ -22,6 +21,7 @@ const styles = StyleSheet.create({
     gap: 10,
     width: "100%",
     backgroundColor: "#0B0C6C",
+    height: 40,
   },
   title: {
     fontSize: 30,

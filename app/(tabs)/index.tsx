@@ -1,13 +1,13 @@
 import * as Clipboard from 'expo-clipboard';
 import { Share, StyleSheet, Text, View } from 'react-native';
 
+import prompted from "@/assets/prompts.json";
 import ButtonTouch from '@/components/ButtonTouch';
 import Header from '@/components/Header';
 import PromptHolder from '@/components/PromptHolder';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
-import prompted from "../../assets/prompts.json";
 
 
 export default function HomeScreen() {
@@ -34,7 +34,6 @@ export default function HomeScreen() {
   const router = useRouter();
   const [date, setDate] = useState("");
 
-  const [data, setData] = useState<any | undefined>();
   useEffect(() => {
     //  setData(prompted.prompts.filter((item) => item.date === date)[0])
      console.log(prompted.prompts.find(item => item.date == date))

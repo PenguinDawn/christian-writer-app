@@ -23,10 +23,12 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 2.5,
     backgroundColor: "#DCE0DC",
+    minHeight: 150
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    paddingBottom: 5,
   },
   paragraphed: {
     color: "black",
